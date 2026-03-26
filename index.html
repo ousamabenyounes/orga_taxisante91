@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Taxisante91 : Votre taxi conventionné dans l'Essonne</title>
+<style>
+  /* Variables de couleur et styles de base de la référence */
+  :root{--p:#3b5bdb;--a:#4dabf7;--bg:#f0f4ff;--nav:#1a1f4e;--tx:#1a1a2e;--mu:#6c757d;--cb:#ffffff;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;}
+
+  /* ── NAV */
+  nav{position:sticky;top:0;z-index:100;background:var(--nav);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow:0 2px 20px rgba(0,0,0,.15);}
+  .logo-svg{height:40px;width:auto;} /* Taille de l'image SVG dans la barre de navigation */
+  .logo-svg rect:first-of-type{fill:var(--nav);} /* Assure que le fond du logo correspond à la nav */
+  .logo-svg rect:last-of-type{fill:var(--p);} /* Accent de couleur du logo */
+  .logo-svg text{fill:#fff;} /* Couleur du texte du logo */
+
+  .nav-links{display:none;} /* Masqué par défaut sur mobile */
+  .nav-links a{color:rgba(255,255,255,.75);font-size:14px;font-weight:500;text-decoration:none;transition:color .15s;}
+  .nav-links a:hover{color:#fff;}
+  .nav-tel{background:#3b5bdb;color:#fff;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.01em;white-space:nowrap;}
+
+  /* ── HERO */
+  .hero{background:#1a1f4e;color:#ffffff;min-height:92vh;display:flex;align-items:center;padding:60px 20px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.35) 0%,transparent 60%);}
+  .hero-inner{max-width:640px;position:relative;z-index:1;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#ffffff;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:24px;backdrop-filter:blur(6px);}
+  .hero h1{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:clamp(32px,8vw,58px);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-.02em;}
+  .hero p{font-size:16px;opacity:.8;margin-bottom:36px;line-height:1.6;max-width:500px;}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn-p{background:#3b5bdb;color:#fff;padding:12px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;display:inline-block;box-shadow:0 4px 24px #3b5bdb66;}
+  .btn-s{background:rgba(255,255,255,.12);color:#ffffff;padding:12px 24px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block;border:1.5px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);}
+
+  /* ── SECTIONS communes */
+  .section{padding:60px 20px;}
+  .section-head{text-align:center;margin-bottom:40px;}
+  .section-head h2{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:clamp(24px,6vw,38px);font-weight:800;letter-spacing:-.02em;}
+  .section-head p{font-size:15px;color:var(--mu);margin-top:10px;}
+
+  /* ── SERVICES */
+  .services{background:#f8f9ff;}
+  .cards-grid{display:grid;grid-template-columns:1fr;gap:20px;max-width:840px;margin:0 auto;} /* Mobile-first: une seule colonne */
+  .card{background:var(--cb);border-radius:20px;padding:28px 24px;border:1.5px solid rgba(0,0,0,.06);text-align:center;display:flex;flex-direction:column;align-items:center;}
+  .card-icon{margin-bottom:14px;color:var(--p);flex-shrink:0;}
+  .card-icon svg{width:30px;height:30px;}
+  .card h3{font-size:17px;font-weight:700;margin-bottom:8px;}
+  .card p{font-size:14px;color:var(--mu);line-height:1.65;}
+
+  /* ── FEATURES / Pourquoi nous */
+  .features{background:#ffffff;}
+  .features-grid{display:grid;grid-template-columns:1fr;gap:30px;max-width:840px;margin:0 auto;}
+  .feature-item{background:var(--cb);border-radius:20px;padding:24px;border:1.5px solid rgba(0,0,0,.06);display:flex;align-items:flex-start;gap:20px;text-align:left;}
+  .feature-item svg{flex-shrink:0;width:40px;height:40px;color:var(--p);}
+  .feature-item h3{font-size:18px;font-weight:700;margin-bottom:6px;}
+  .feature-item p{font-size:14px;color:var(--mu);}
+
+  /* ── ABOUT */
+  .about{background:#f0f4ff;}
+  .about-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px;align-items:center;} /* Mobile-first: une seule colonne */
+  .about-text h2{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:clamp(22px,5vw,34px);font-weight:800;margin-bottom:16px;letter-spacing:-.02em;}
+  .about-text p{font-size:15px;color:var(--mu);line-height:1.75;margin-bottom:1em;}
+  .stats-row{display:flex;gap:20px;margin-top:32px;flex-wrap:wrap;justify-content:center;} /* Centré pour mobile */
+  .stat{text-align:center;}
+  .stat-num{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:30px;font-weight:900;color:#3b5bdb;line-height:1;}
+  .stat-label{font-size:13px;color:var(--mu);margin-top:4px;}
+  .about-visual{background:linear-gradient(135deg, var(--p) 0%, var(--a) 100%);border-radius:16px;min-height:250px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:700;padding:20px;text-align:center;} /* Visuel simple */
+
+  /* ── FORMULAIRE DE CONTACT */
+  .contact{background:var(--cb);}
+  .contact-form-container{max-width:700px;margin:0 auto;}
+  .contact-form{display:grid;grid-template-columns:1fr;gap:18px;}
+  .form-group{margin-bottom:12px;}
+  .form-group label{display:block;font-size:14px;font-weight:600;color:var(--tx);margin-bottom:6px;}
+  .form-group input, .form-group textarea, .form-group select{width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;font-family:inherit;color:var(--tx);background:var(--bg);}
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 2px rgba(59,91,219,.2);}
+  .form-group textarea{min-height:100px;resize:vertical;}
+  .form-grid-2{display:grid;grid-template-columns:1fr;gap:18px;} /* Mobile-first: une seule colonne */
+  .checkbox-group{display:flex;align-items:center;gap:10px;margin-top:10px;}
+  .checkbox-group input[type="checkbox"]{width:auto;margin:0;accent-color:var(--p);}
+  .checkbox-group label{font-size:14px;font-weight:400;color:var(--mu);margin:0;}
+  .form-submit-btn{background:var(--p);color:#fff;padding:14px 32px;border-radius:10px;font-size:16px;font-weight:700;border:none;cursor:pointer;width:100%;transition:background .2s ease;margin-top:20px;}
+  .form-submit-btn:hover{background:var(--a);}
+
+  /* ── FOOTER */
+  footer{background:var(--nav);color:rgba(255,255,255,.7);padding:40px 20px;text-align:center;font-size:14px;}
+  footer p{margin-bottom:10px;}
+  footer a{color:var(--a);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+  .footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:15px;flex-wrap:wrap;}
+
+
+  /* ── MEDIA QUERIES */
+  @media (min-width: 768px) {
+    nav{padding:0 40px;}
+    .nav-links{display:flex;gap:28px;} /* Afficher les liens de navigation sur les écrans plus larges */
+    .hero{padding:80px 40px;}
+    .hero h1{font-size:clamp(40px,5vw,58px);}
+    .hero p{font-size:18px;}
+    .hero-actions{gap:14px;}
+
+    .section{padding:80px 40px;}
+    .section-head{margin-bottom:52px;}
+    .section-head h2{font-size:clamp(28px,3.5vw,38px);}
+    .section-head p{font-size:16px;}
+
+    .cards-grid{grid-template-columns:repeat(2,1fr);}
+    .card{text-align:left;align-items:flex-start;}
+
+    .features-grid{grid-template-columns:repeat(2,1fr);}
+    .feature-item{padding:28px;}
+
+    .about-inner{grid-template-columns:1fr 1fr;gap:60px;}
+    .about-text h2{font-size:clamp(28px,3vw,34px);}
+    .stats-row{justify-content:flex-start;}
+    .stat{text-align:left;}
+
+    .form-grid-2{grid-template-columns:1fr 1fr;}
+  }
+
+  @media (min-width: 1024px) {
+    .cards-grid{grid-template-columns:repeat(3,1fr);}
+    .features-grid{grid-template-columns:repeat(3,1fr);}
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <a href="#accueil" class="logo">
+      <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+        <rect width="200" height="80" rx="12" fill="var(--nav)"/>
+        <rect x="10" y="62" width="30" height="4" rx="2" fill="var(--p)"/>
+        <text x="100" y="48" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="28"
+          font-weight="900" font-style="normal"
+          letter-spacing="1" fill="#fff" text-anchor="middle"
+          dominant-baseline="middle">Taxisante91</text>
+      </svg>
+    </a>
+    <div class="nav-links">
+      <a href="#accueil">Accueil</a>
+      <a href="#services">Services</a>
+      <a href="#a-propos">À propos</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="tel:+33123456789" class="nav-tel">01 23 45 67 89</a>
+  </nav>
+
+  <main>
+    <section id="accueil" class="hero">
+      <div class="hero-inner">
+        <span class="hero-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+          Agrément CPAM 91
+        </span>
+        <h1>Votre taxi conventionné dans l'Essonne (91)</h1>
+        <p>Transport médicalisé assis (VSL), TPMR et toutes distances. Confort, sécurité et ponctualité pour vos rendez-vous médicaux.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-p">Réserver un taxi</a>
+          <a href="#contact" class="btn-s">Demander un devis</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services">
+      <div class="section-head">
+        <h2>Nos services de transport médicalisé</h2>
+        <p>Une prise en charge complète et adaptée à vos besoins spécifiques pour le 91.</p>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="m12 22-5-3 5-3 5 3-5 3"/><path d="M12 22V4"/><path d="M9.827 8.35a2 2 0 1 0 2.346 0"/></svg>
+          </div>
+          <h3>Taxi conventionné CPAM</h3>
+          <p>Transport assis professionnalisé (TAP) pris en charge par l'Assurance Maladie. Nous gérons toutes les démarches administratives.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hospital"><path d="M12 6V2"/><path d="M18 6V2"/><path d="M6 6V2"/><path d="M10 22h4"/><path d="M10 18h4"/><path d="M15 22h-6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2Z"/></svg>
+          </div>
+          <h3>Accompagnement médical</h3>
+          <p>Transport vers hôpitaux, cliniques, cabinets médicaux, centres de dialyse, radiothérapie, kinésithérapie, etc.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bus"><path d="M19 17h2l.6-1.5a2 2 0 0 0 0-1L20 12h-8V6h-2v6H6l-1.6 2.5a2 2 0 0 0 0 1L3 17h2"/><path d="M10 6H6"/><path d="M18 17h-8"/><path d="M14 17h-2"/><path d="M5 17a2 2 0 1 0 0 4"/><circle cx="17" cy="19" r="2"/></svg>
+          </div>
+          <h3>Transport TPMR</h3>
+          <p>Véhicules adaptés au transport de Personnes à Mobilité Réduite (TPMR) avec toutes les sécurités nécessaires.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M12 21.7C17.3 17 22 13 22 10A7 7 0 1 0 8 5a7 7 0 0 0 4 5.7V21.7z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>Toutes distances</h3>
+          <p>Nous vous transportons sur de courtes ou longues distances, en Essonne et vers toute l'Île-de-France.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section features">
+      <div class="section-head">
+        <h2>Pourquoi choisir Taxisante91 ?</h2>
+        <p>Votre partenaire de confiance pour tous vos transports de santé dans l'Essonne.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m16 11 2 2 4-4"/></svg>
+          <div>
+            <h3>Chauffeurs professionnels</h3>
+            <p>Nos chauffeurs sont expérimentés, discrets et formés aux spécificités du transport médical.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-car"><path d="M19 17H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2Z"/><circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/></svg>
+          <div>
+            <h3>Véhicules confortables</h3>
+            <p>Nos véhicules sont modernes, bien entretenus et adaptés pour un trajet en toute sérénité.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2h-2"/><path d="M8 7h8"/><path d="M8 12h8"/><path d="M8 17h8"/></svg>
+          <div>
+            <h3>Prise en charge administrative</h3>
+            <p>Nous vous accompagnons dans les démarches de prise en charge par la Sécurité Sociale et mutuelles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="a-propos" class="section about">
+      <div class="about-inner">
+        <div class="about-text">
+          <h2>Taxisante91 : Votre partenaire de confiance en Essonne</h2>
+          <p>Depuis plusieurs années, Taxisante91 s'engage à offrir un service de transport médicalisé de qualité supérieure dans tout le département de l'Essonne (91). Nous comprenons l'importance d'arriver à l'heure et dans les meilleures conditions à vos rendez-vous médicaux.</p>
+          <p>Notre équipe de chauffeurs dévoués est formée pour vous assurer un trajet confortable, sécurisé et respectueux de votre intimité. Que ce soit pour un VSL, un transport TPMR ou un simple trajet, votre bien-être est notre priorité.</p>
+          <div class="stats-row">
+            <div class="stat">
+              <div class="stat-num">5+</div>
+              <div class="stat-label">Années d'expérience</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">1000+</div>
+              <div class="stat-label">Patients transportés</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">91</div>
+              <div class="stat-label">Département desservi</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual">
+          Taxisante91 : <br> Expertise et Sérénité
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="section-head">
+        <h2>Contactez-nous pour votre réservation</h2>
+        <p>Remplissez le formulaire ci-dessous ou appelez-nous directement pour un service rapide et efficace.</p>
+      </div>
+      <div class="contact-form-container">
+        <form class="contact-form" action="#" method="POST">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="name">Nom & Prénom</label>
+              <input type="text" id="name" name="name" placeholder="Votre nom et prénom" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Téléphone</label>
+              <input type="tel" id="phone" name="phone" placeholder="Ex: 06 12 34 56 78" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Votre adresse email (optionnel)">
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="date">Date de prise en charge souhaitée</label>
+              <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="time">Heure de prise en charge souhaitée</label>
+              <input type="time" id="time" name="time" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pickup">Adresse de départ</label>
+            <input type="text" id="pickup" name="pickup" placeholder="Ex: 10 Rue de la Gare, 91000 Évry-Courcouronnes" required>
+          </div>
+          <div class="form-group">
+            <label for="destination">Adresse de destination</label>
+            <input type="text" id="destination" name="destination" placeholder="Ex: Hôpital Sud Francilien, Corbeil-Essonnes" required>
+          </div>
+          <div class="form-group">
+            <label for="transport-type">Type de transport</label>
+            <select id="transport-type" name="transport-type" required>
+              <option value="">Sélectionnez un type</option>
+              <option value="vsl">Taxi Conventionné / VSL</option>
+              <option value="tpmr">Transport TPMR (Personne à Mobilité Réduite)</option>
+              <option value="standard">Taxi Classique (non médicalisé)</option>
+            </select>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="cpam-coverage" name="cpam-coverage">
+            <label for="cpam-coverage">Je dispose d'une prescription médicale de transport (PMT) pour une prise en charge CPAM.</label>
+          </div>
+          <div class="form-group">
+            <label for="message">Message ou détails supplémentaires (optionnel)</label>
+            <textarea id="message" name="message" placeholder="Informations importantes, nombre de personnes, etc."></textarea>
+          </div>
+          <button type="submit" class="form-submit-btn">Envoyer ma demande</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+        <a href="#accueil">Accueil</a>
+        <a href="#services">Services</a>
+        <a href="#a-propos">À propos</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <p>Téléphone : <a href="tel:+33123456789">01 23 45 67 89</a> | Email : <a href="mailto:contact@taxisante91.fr">contact@taxisante91.fr</a></p>
+    <p>&copy; 2023 Taxisante91. Tous droits réservés.</p>
+  </footer>
+</body>
+</html>
