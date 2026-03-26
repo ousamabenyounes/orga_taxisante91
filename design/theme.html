@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Votre taxi conventionné : sérénité assurée</title>
+<style>
+  :root{--p:#3b5bdb;--a:#4dabf7;--bg:#f0f4ff;--nav:#1a1f4e;--tx:#1a1a2e;--mu:#6c757d;--cb:#ffffff;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;}
+  /* ── NAV */
+  nav{position:sticky;top:0;z-index:100;background:var(--nav);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow:0 2px 20px rgba(0,0,0,.15);}
+  .logo{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:20px;font-weight:800;color:#fff;letter-spacing:-.03em;text-decoration:none;}
+  .nav-links{display:flex;gap:28px;}
+  .nav-links a{color:rgba(255,255,255,.75);font-size:14px;font-weight:500;text-decoration:none;transition:color .15s;}
+  .nav-links a:hover{color:#fff;}
+  .nav-tel{background:#3b5bdb;color:#fff;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.01em;}
+  /* ── HERO */
+  .hero{background:#1a1f4e;color:#ffffff;min-height:92vh;display:flex;align-items:center;padding:60px 40px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.35) 0%,transparent 60%);}
+  .hero-inner{max-width:640px;position:relative;z-index:1;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#ffffff;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:24px;backdrop-filter:blur(6px);}
+  .hero h1{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:clamp(32px,5vw,58px);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-.02em;}
+  .hero p{font-size:18px;opacity:.8;margin-bottom:36px;line-height:1.6;max-width:500px;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-p{background:#3b5bdb;color:#fff;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;display:inline-block;box-shadow:0 4px 24px #3b5bdb66;}
+  .btn-s{background:rgba(255,255,255,.12);color:#ffffff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;display:inline-block;border:1.5px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);}
+  /* ── SECTIONS communes */
+  .section{padding:80px 40px;}
+  .section-head{text-align:center;margin-bottom:52px;}
+  .section-head h2{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:clamp(24px,3.5vw,38px);font-weight:800;letter-spacing:-.02em;}
+  .section-head p{font-size:16px;color:var(--mu);margin-top:10px;}
+  /* ── SERVICES */
+  .services{background:#f8f9ff;}
+  .cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:840px;margin:0 auto;}
+  .card{background:var(--cb);border-radius:20px;padding:28px 24px;border:1.5px solid rgba(0,0,0,.06);}
+  .card-icon{font-size:30px;margin-bottom:14px;}
+  .card h3{font-size:17px;font-weight:700;margin-bottom:8px;}
+  .card p{font-size:14px;color:var(--mu);line-height:1.65;}
+  /* ── ABOUT */
+  .about{background:#ffffff;}
+  .about-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .about-text h2{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:clamp(22px,3vw,34px);font-weight:800;margin-bottom:16px;letter-spacing:-.02em;}
+  .about-text p{font-size:15px;color:var(--mu);line-height:1.75;}
+  .stats-row{display:flex;gap:28px;margin-top:32px;flex-wrap:wrap;}
+  .stat{}
+  .stat-num{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:32px;font-weight:900;color:#3b5bdb;line-height:1;}
+  .stat-label{font-size:13px;color:var(--mu);margin-top:4px;}
+  .about-visual{background:linear-gradient(135deg,#3b5bdb22,#4dabf744);border-radius:24px;height:280px;display:flex;align-items:center;justify-content:center;font-size:80px;}
+  /* ── CONTACT */
+  .contact-section{background:#f0f4ff;}
+  .contact-grid{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+  .cinfo{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:15px;}
+  .cinfo span:first-child{font-size:18px;flex-shrink:0;}
+  .map-placeholder{background:linear-gradient(135deg,#3b5bdb11,#4dabf722);border-radius:16px;height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px dashed #3b5bdb44;}
+  .map-wrap{border-radius:16px;overflow:hidden;height:280px;box-shadow:0 4px 20px rgba(0,0,0,.1);}
+  .cta-bar{margin-top:28px;}
+  .cta-bar a{display:inline-flex;align-items:center;gap:10px;background:#3b5bdb;color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;}
+  /* ── FOOTER */
+  footer{background:#1a1f4e;color:rgba(255,255,255,.4);text-align:center;padding:28px 40px;font-size:13px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="logo">taxisante91</a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">À propos</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="tel:01 60 00 00 00" class="nav-tel">📞 Réserver maintenant</a>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-badge">🚖 Agréé CPAM</div>
+    <h1>Votre taxi conventionné : sérénité assurée</h1>
+    <p>Transport médical sécurisé et confortable dans l'Essonne (91).</p>
+    <div class="hero-actions">
+      <a href="tel:01 60 00 00 00" class="btn-p">Réserver maintenant →</a>
+      <a href="#services" class="btn-s">Découvrir nos services</a>
+    </div>
+  </div>
+</section>
+
+<section class="section services" id="services">
+  <div class="section-head">
+    <h2>Nos Services</h2>
+    <p>Des solutions de transport adaptées à chaque situation</p>
+  </div>
+  <div class="cards-grid">
+    
+        <div class="card">
+          <div class="card-icon">🏥</div>
+          <h3>Transports Médicaux</h3>
+          <p>Agréés CPAM, nous assurons vos trajets vers hôpitaux et cliniques avec ponctualité.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">♿</div>
+          <h3>Véhicule Adapté</h3>
+          <p>Confort et sécurité pour tous vos déplacements, y compris pour les personnes à mobilité réduite.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⏰</div>
+          <h3>Disponibilité 24/7</h3>
+          <p>Votre chauffeur disponible à toute heure, pour vos rendez-vous urgents ou planifiés.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">✨</div>
+          <h3>Service Premium</h3>
+          <p>Un trajet tout confort, véhicule impeccable et conduite douce pour votre bien-être.</p>
+        </div>
+  </div>
+</section>
+
+<section class="section about" id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <h2>Notre engagement pour votre santé</h2>
+      <p>Depuis des années, taxisante91 s'engage à offrir un service de transport médical conventionné d'excellence dans l'Essonne. Votre confort, votre sécurité et votre ponctualité sont notre priorité absolue. Faites confiance à notre équipe pour tous vos déplacements de santé.</p>
+      <div class="stats-row">
+        
+        <div class="stat">
+          <div class="stat-num">15+</div>
+          <div class="stat-label">ans d'expérience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">99%</div>
+          <div class="stat-label">trajets conformes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">agréé CPAM</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">🚖</div>
+  </div>
+</section>
+
+<section class="section contact-section" id="contact">
+  <div class="section-head">
+    <h2>Nous contacter</h2>
+    <p>Disponible 24h/24 · 7j/7 pour vos besoins</p>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <div class="cinfo"><span>📍</span><span>123 Avenue de la Santé, 91100 Corbeil-Essonnes</span></div><div class="cinfo"><span>📞</span><a href="tel:01 60 00 00 00" style="color:inherit;text-decoration:none;">01 60 00 00 00</a></div><div class="cinfo"><span>🕐</span><span>Lun – Dim · 24h/24</span></div><div class="cinfo"><span>💳</span><span>Tiers payant CPAM · CB · Espèces</span></div>
+      <div class="cta-bar">
+        <a href="tel:01 60 00 00 00">Réserver maintenant maintenant →</a>
+      </div>
+    </div>
+    <div>
+      
+        <div class="map-placeholder">
+          <div style="font-size:40px;">📍</div>
+          <div style="font-weight:700;font-size:15px;margin-top:8px;">123 Avenue de la Santé, 91100 Corbeil-Essonnes</div>
+          <div style="font-size:12px;opacity:.5;margin-top:4px;">Voir sur la carte →</div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 taxisante91 — Votre partenaire santé · Propulsé par Ora Studio</footer>
+
+</body>
+</html>
