@@ -59,6 +59,17 @@
   .cta-bar a{display:inline-flex;align-items:center;gap:10px;background:#3b5bdb;color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;}
   /* ── FOOTER */
   footer{background:#1a1f4e;color:rgba(255,255,255,.4);text-align:center;padding:28px 40px;font-size:13px;}
+  /* ── ANIMATIONS fade-in + slide-up */
+  @keyframes fadeSlideUp{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .anim-section{opacity:0;transform:translateY(20px);}
+  .anim-section.animate-in{animation:fadeSlideUp .5s ease-out forwards;}
+  @media(prefers-reduced-motion:reduce){
+    .anim-section{opacity:1;transform:none;}
+    .anim-section.animate-in{animation:none;}
+  }
 </style>
 </head>
 <body>
@@ -73,7 +84,7 @@
   <a href="tel:01 60 00 00 00" class="nav-tel">📞 Réserver maintenant</a>
 </nav>
 
-<section class="hero" id="home">
+<section class="hero anim-section" id="home">
   <div class="hero-inner">
     <div class="hero-badge">🚖 Agréé CPAM</div>
     <h1>Votre taxi conventionné : sérénité assurée</h1>
@@ -85,7 +96,7 @@
   </div>
 </section>
 
-<section class="section services" id="services">
+<section class="section services anim-section" id="services">
   <div class="section-head">
     <h2>Nos Services</h2>
     <p>Des solutions de transport adaptées à chaque situation</p>
@@ -115,7 +126,7 @@
   </div>
 </section>
 
-<section class="section about" id="about">
+<section class="section about anim-section" id="about">
   <div class="about-inner">
     <div class="about-text">
       <h2>Notre engagement pour votre santé</h2>
@@ -140,7 +151,7 @@
   </div>
 </section>
 
-<section class="section contact-section" id="contact">
+<section class="section contact-section anim-section" id="contact">
   <div class="section-head">
     <h2>Nous contacter</h2>
     <p>Disponible 24h/24 · 7j/7 pour vos besoins</p>
@@ -165,5 +176,14 @@
 
 <footer>© 2025 taxisante91 — Votre partenaire santé · Propulsé par Ora Studio</footer>
 
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var sections=document.querySelectorAll('.anim-section');
+  sections.forEach(function(el,i){
+    el.style.animationDelay=i*0.1+'s';
+    el.classList.add('animate-in');
+  });
+});
+</script>
 </body>
 </html>
